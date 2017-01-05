@@ -1,0 +1,8 @@
+{
+  "name": "testing-bram",
+  "version": "0.0.0",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "dependencies": {
+    "bram": "^0.6.0"
+  }
+}

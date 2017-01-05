@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>A simple Bram element</title>
+  <script src="../bower_components/custom-elements/custom-elements.min.js"></script>
+  <script src="../bower_components/shadydom/shadydom.min.js"></script>
+  <script src="../bower_components/shadycss/shadycss.min.js"></script>
+  <script src="../bower_components/bram/bram.umd.js"></script>
+  <style>
+    simple-element {
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <template id="simpleElementTemplate">
+    <style>
+      :host {
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        display: flex;
+        width: 300px;
+        height: 300px;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        color: white;
+        background-color: black;
+        box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+      }
+      
+      img {
+        cursor: pointer;
+      }
+    </style>
+    <img src="../img/testing-bram.png" on-click="handleClick">
+    <h1>Clicks: {{count}}</h1>
+  </template>
+
+  <script>
+    ShadyCSS.prepareTemplate(simpleElementTemplate, 'simple-element');
+    class SimpleElement extends Bram.Element {
+      static get template() {
+        return '#simpleElementTemplate';
+      }
+
+      constructor() {
+        super();
+        ShadyCSS.applyStyle(this);
+        this.model.count = 0;
+      }
+
+
+      handleClick() {
+        this.model.count++;
+      }
+    }
+    customElements.define('simple-element', SimpleElement);
+  </script>
+
+  <h1>Testing Bram</h1>
+
+  <p>Testing <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">&lt;template></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements">Custom Elements</a>,
+    and <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM">Shadow DOM</a>.</p>
+
+  <p>Using no polyfil (It should work on any recent Blink based browser (Chrome, Chromium, Opera...).</p>
+
+  <simple-element></simple-element>
+
+</body>
+
+</html>
